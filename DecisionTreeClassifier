@@ -1,0 +1,12 @@
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import tree
+#sample data
+x=[[25,3,1],[25,1,3],[40,2,2],[60,3,1],[60,1,2]]
+#age,income,creditscore
+y=[0,0,1,1,0] #0=no,1=yes
+#create and train the modal
+modal=DecisionTreeClassifier()
+modal.fit(x,y)
+#visualizing the decision tree
+tree.plot_tree(modal,feature_names=['age','income','creditscore'],
+               class_names=["no","yes"],filled=True)
