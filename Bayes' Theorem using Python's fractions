@@ -1,0 +1,15 @@
+from fractions import Fraction
+
+def bayes_theorem(p_a, p_b_given_a, p_b):
+    return ((p_b_given_a * p_a) / p_b)
+
+# Define probabilities
+p_a = Fraction(3, 8)
+p_b_given_a = Fraction(2, 3)
+p_b = Fraction(4, 8)
+
+# Calculate p_a_given_b using Bayes' theorem
+p_a_given_b = bayes_theorem(p_a, p_b_given_a, p_b)
+
+# Print the result
+print(f" p(a | b) = {float(p_a_given_b):.2f} ({p_a_given_b})")
