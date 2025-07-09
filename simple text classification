@@ -1,0 +1,32 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
+X_train=[
+    "Students are preparing for final exams in school and colleges.",
+    "Government introduces new education policy to improve literacy.",
+    "The teachers explained the importance of science in daily life.",
+    "A new stadium is under construction for the upcoming football tournment.",
+    "The cricket team won the championship after a thrilling match.",
+    "Tennis players train hard for the Grand Slam Tournmant.",
+    "The president announced new policies for economic growth.",
+    "The parliament passed a new bill regarding taxation.",
+    "The election campaign focuses on social reforms and employment."
+]
+Y_train=[
+    "Education","Education","Education",
+    "Sports","Sports","Sports",
+    "Politics","Politics","Politics"
+]
+model=Pipeline([
+    ('vectorizer',TfidfVectorizer()),
+    ('classifier',MultinomialNB())
+])
+model.fit(X_train,Y_train)
+test_articles=[
+    "A new school curriculum is being developed for the students.",
+    "The football team is training for the next championship.",
+    "The government annnounced new tax policies."
+]
+predictions=model.predict(test_articles)
+for article, category in zip(test_articles,predictions):
+  print(f"Article: '{article}' -> Category: {category}\n")
