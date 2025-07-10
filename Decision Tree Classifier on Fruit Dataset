@@ -1,0 +1,35 @@
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import tree
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+# Create a Pandas DataFrame from the fruit data
+data = {
+    'FRUIT': ['apple', 'banana', 'grape', 'lemon'],
+    'COLOUR': ['red', 'yellow', 'purple', 'yellow'],
+    'SIZE': ['medium', 'long', 'long', 'medium'],
+    'TASTE': ['sweet', 'sweet', 'sweet', 'sour'],
+    'LABLE': ['apple', 'banana', 'grape', 'lemon']
+}
+df = pd.DataFrame(data)
+
+# Initialize LabelEncoder
+label_encoder = LabelEncoder()
+
+# Create a list of categorical features
+categorical_features = ['COLOUR', 'SIZE', 'TASTE']
+
+# Apply label encoding to each categorical feature
+for feature in categorical_features:
+    df[feature] = label_encoder.fit_transform(df[feature])
+
+# Define features (x) and target (y)
+x = df[['COLOUR', 'SIZE', 'TASTE']]
+y = df['LABLE']
+
+# Create and train the decision tree classifier
+modal = DecisionTreeClassifier()
+modal.fit(x, y)
+
+# Visualize the decision tree
+tree.plot_tree(modal, feature_names=x.columns, class_names=y.unique(), filled=True)
